@@ -1,0 +1,7 @@
+### IDEA ###
+logs/*
+.idea/*
+*.iml
+*/target/*
+*/*.iml
+*.log

@@ -1,9 +1,17 @@
 package com.will;
 
+import com.will.register.DefaultServiceRegistry;
+import com.will.remoting.socket.RpcServer;
+
 public class RpcServerMain {
     public static void main(String[] args) {
-        HelloService helloService = new HelloServiceImpl();
-        RpcServer rpcServer = new RpcServer();
-        rpcServer.register(helloService, 9999);
+        HelloServiceImpl helloService = new HelloServiceImpl();
+        HelloServiceImpl1 helloService1 = new HelloServiceImpl1();
+        DefaultServiceRegistry defaultServiceRegistry = new DefaultServiceRegistry();
+        // 手动注册
+        defaultServiceRegistry.register(helloService);
+        defaultServiceRegistry.register(helloService1);
+        RpcServer rpcServer = new RpcServer(defaultServiceRegistry);
+        rpcServer.start(9999);
     }
 }

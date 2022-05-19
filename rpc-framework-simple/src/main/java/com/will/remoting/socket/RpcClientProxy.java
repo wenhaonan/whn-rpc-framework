@@ -1,4 +1,4 @@
-package com.will;
+package com.will.remoting.socket;
 
 import com.will.dto.RpcRequest;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ public class RpcClientProxy implements InvocationHandler {
     }
 
     public <T> T getProxy(Class<T> clazz) {
-        return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class<?>[]{clazz}, RpcClientProxy.this);
+        return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class<?>[]{clazz}, this);
     }
 
     @Override

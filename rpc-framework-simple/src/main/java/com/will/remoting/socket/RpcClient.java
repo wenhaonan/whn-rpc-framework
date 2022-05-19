@@ -1,4 +1,4 @@
-package com.will;
+package com.will.remoting.socket;
 
 import com.will.dto.RpcRequest;
 import com.will.dto.RpcResponse;

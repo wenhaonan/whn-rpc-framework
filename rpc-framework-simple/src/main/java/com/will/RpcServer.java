@@ -1,5 +1,7 @@
 package com.will;
 
+import com.will.enums.RpcErrorMessageEnum;
+import com.will.exception.RpcException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,12 +29,16 @@ public class RpcServer {
      * TODO 修改为注解扫描
      */
     public void register(Object service, int port) {
+        if (null == service) {
+            throw new RpcException(RpcErrorMessageEnum.SERVICE_CAN_NOT_BE_NULL);
+        }
         try (ServerSocket socketServer = new ServerSocket(port);) {
             logger.info("server starts");
+            logger.info("service registered: " + service.getClass().getName());
             Socket socket;
             while ((socket = socketServer.accept()) != null) {
                 logger.info("client connected");
-                threadPool.execute(new WorkerThread(socket, service));
+                threadPool.execute(new ClientMessageHandlerThread(socket, service));
             }
         } catch (IOException e) {
             logger.error("occur IOException", e);

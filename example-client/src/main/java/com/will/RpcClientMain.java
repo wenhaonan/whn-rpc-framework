@@ -1,10 +1,12 @@
 package com.will;
 
-import com.will.remoting.socket.RpcClientProxy;
+import com.will.transport.RpcClientProxy;
+import com.will.transport.socket.SocketRpcClient;
 
 public class RpcClientMain {
     public static void main(String[] args) {
-        RpcClientProxy rpcClientProxy = new RpcClientProxy("127.0.0.1", 9999);
+        SocketRpcClient socketRpcClient = new SocketRpcClient("127.0.0.1", 9999);
+        RpcClientProxy rpcClientProxy = new RpcClientProxy(socketRpcClient);
         HelloService service = rpcClientProxy.getProxy(HelloService.class);
         // 调用未注册类
         HelloService1 service1 = rpcClientProxy.getProxy(HelloService1.class);

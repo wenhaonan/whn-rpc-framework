@@ -1,17 +1,20 @@
 package com.will;
 
 import com.will.register.DefaultServiceRegistry;
-import com.will.transport.socket.SocketRpcServer;
+import com.will.transport.netty.NettyRpcServer;
 
-public class RpcServerMain {
+/**
+ * @author haonan.wen
+ * @createTime 2022/5/26 上午10:45
+ */
+public class NettyServerMain {
+
     public static void main(String[] args) {
         HelloServiceImpl helloService = new HelloServiceImpl();
-        HelloServiceImpl1 helloService1 = new HelloServiceImpl1();
         DefaultServiceRegistry defaultServiceRegistry = new DefaultServiceRegistry();
         // 手动注册
         defaultServiceRegistry.register(helloService);
-        defaultServiceRegistry.register(helloService1);
-        SocketRpcServer rpcServer = new SocketRpcServer(defaultServiceRegistry);
-        rpcServer.start(9999);
+        NettyRpcServer socketRpcServer = new NettyRpcServer(9999);
+        socketRpcServer.run();
     }
 }

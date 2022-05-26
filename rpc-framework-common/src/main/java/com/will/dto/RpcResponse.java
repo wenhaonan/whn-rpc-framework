@@ -1,7 +1,9 @@
 package com.will.dto;
 
 import com.will.enums.RpcResponseCode;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -10,6 +12,8 @@ import java.io.Serializable;
  * @createTime 2022/5/19 下午2:37
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RpcResponse<T> implements Serializable {
 
     private static final long serialVersionUID = 3944133975785226662L;

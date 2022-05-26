@@ -1,9 +1,9 @@
-package com.will.remoting.socket;
+package com.will.transport.socket;
 
 import com.will.dto.RpcRequest;
 import com.will.exception.RpcException;
 import com.will.register.ServiceRegistry;
-import com.will.remoting.RpcRequestHandler;
+import com.will.transport.RpcRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

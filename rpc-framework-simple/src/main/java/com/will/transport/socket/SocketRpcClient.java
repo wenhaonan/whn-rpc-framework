@@ -1,10 +1,12 @@
-package com.will.remoting.socket;
+package com.will.transport.socket;
 
 import com.will.dto.RpcRequest;
 import com.will.dto.RpcResponse;
 import com.will.enums.RpcErrorMessageEnum;
 import com.will.enums.RpcResponseCode;
 import com.will.exception.RpcException;
+import com.will.transport.RpcClient;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,11 +15,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class RpcClient {
+@AllArgsConstructor
+public class SocketRpcClient implements RpcClient {
 
-    public static final Logger logger = LoggerFactory.getLogger(RpcClient.class);
+    public static final Logger logger = LoggerFactory.getLogger(SocketRpcClient.class);
 
-    public Object sendRpcRequest(RpcRequest rpcRequest, String host, int port) {
+    private String host;
+    private int port;
+
+    @Override
+    public Object sendRpcRequest(RpcRequest rpcRequest) {
         try (Socket socket = new Socket(host, port)) {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectOutputStream.writeObject(rpcRequest);

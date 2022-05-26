@@ -1,4 +1,4 @@
-package com.will.remoting.socket;
+package com.will.transport;
 
 import com.will.dto.RpcRequest;
 import org.slf4j.Logger;
@@ -11,15 +11,16 @@ import java.lang.reflect.Proxy;
 public class RpcClientProxy implements InvocationHandler {
     private static final Logger logger = LoggerFactory.getLogger(RpcClientProxy.class);
 
-    private String host;
-    private int port;
+    private RpcClient rpcClient;
 
-    public RpcClientProxy(String host, int port) {
-        this.host = host;
-        this.port = port;
+    public RpcClientProxy(RpcClient rpcClient) {
+        this.rpcClient = rpcClient;
     }
 
     public <T> T getProxy(Class<T> clazz) {
+        /**
+         * jdk proxy 只能代理接口，否则报错：java.lang.IllegalArgumentException: com.will.RpcClientMain is not an interface
+         */
         return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class<?>[]{clazz}, this);
     }
 
@@ -31,7 +32,6 @@ public class RpcClientProxy implements InvocationHandler {
                 .interfaceName(method.getDeclaringClass().getName())
                 .paramTypes(method.getParameterTypes())
                 .build();
-        RpcClient rpcClient = new RpcClient();
-        return rpcClient.sendRpcRequest(rpcRequest, host, port);
+        return rpcClient.sendRpcRequest(rpcRequest);
     }
 }

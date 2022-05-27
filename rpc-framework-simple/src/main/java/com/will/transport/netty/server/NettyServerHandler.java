@@ -1,4 +1,4 @@
-package com.will.transport.netty;
+package com.will.transport.netty.server;
 
 import com.will.dto.RpcRequest;
 import com.will.register.DefaultServiceRegistry;
@@ -12,6 +12,8 @@ import io.netty.util.ReferenceCountUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * 服务器端处理器，负责处理客户端请求，并执行方法返回
+ *
  * @author haonan.wen
  * @createTime 2022/5/26 上午10:28
  */

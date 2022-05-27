@@ -1,7 +1,7 @@
 package com.will;
 
 import com.will.register.DefaultServiceRegistry;
-import com.will.transport.netty.NettyRpcServer;
+import com.will.transport.netty.server.NettyRpcServer;
 
 /**
  * @author haonan.wen

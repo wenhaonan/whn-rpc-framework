@@ -1,6 +1,8 @@
 package com.will.serializer;
 
 /**
+ * 序列化接口，所有序列化类都要实现这个接口
+ *
  * @author haonan.wen
  * @createTime 2022/5/25 下午7:37
  */

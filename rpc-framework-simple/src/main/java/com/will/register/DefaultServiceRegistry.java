@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * 默认的注册中心，使用map存储服务信息，可以通过zookeeper来改进
  * @author haonan.wen
  * @createTime 2022/5/19 下午3:34
  */

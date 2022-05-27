@@ -2,7 +2,7 @@ package com.will;
 
 import com.will.transport.RpcClient;
 import com.will.transport.RpcClientProxy;
-import com.will.transport.netty.NettyRpcClient;
+import com.will.transport.netty.client.NettyRpcClient;
 
 /**
  * @author haonan.wen

@@ -1,4 +1,4 @@
-package com.will.transport.netty;
+package com.will.transport.netty.codec;
 
 import com.will.serializer.Serializer;
 import io.netty.buffer.ByteBuf;
@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 
 /**
+ * 自定义解码器，负责处理"入站"消息，将消息格式转换为我们需要的业务对象
+ *
  * @author haonan.wen
  * @createTime 2022/5/26 上午9:59
  */

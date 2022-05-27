@@ -1,4 +1,4 @@
-package com.will.transport.netty;
+package com.will.transport.netty.codec;
 
 import com.will.serializer.Serializer;
 import io.netty.buffer.ByteBuf;
@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * 自定义编码器，处理"出站"消息，将对象转换为字节数组写入byteBuf中
+ *
  * @author haonan.wen
  * @createTime 2022/5/26 上午9:59
  */

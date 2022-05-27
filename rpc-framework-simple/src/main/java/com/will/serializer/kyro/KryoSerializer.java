@@ -14,6 +14,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
+ * kryo序列化类，效率很高，但是只兼容java
  * @author haonan.wen
  * @createTime 2022/5/25 下午7:39
  */

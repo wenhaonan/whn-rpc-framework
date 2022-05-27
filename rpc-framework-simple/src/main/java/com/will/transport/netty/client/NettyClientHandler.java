@@ -1,4 +1,4 @@
-package com.will.transport.netty;
+package com.will.transport.netty.client;
 
 import com.will.dto.RpcResponse;
 import io.netty.channel.ChannelHandlerContext;
@@ -8,11 +8,20 @@ import io.netty.util.ReferenceCountUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * 自定义netty客户端channelHandler， 处理服务器发过来的数据
+ *
  * @author haonan.wen
  * @createTime 2022/5/26 上午10:28
  */
 @Slf4j
 public class NettyClientHandler extends ChannelInboundHandlerAdapter {
+
+    /**
+     * 读取服务器传输数据
+     * @param ctx
+     * @param msg
+     * @throws Exception
+     */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         try {

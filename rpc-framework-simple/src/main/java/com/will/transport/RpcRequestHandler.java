@@ -32,6 +32,6 @@ public class RpcRequestHandler {
         if (null == method) {
             return RpcResponse.fail(RpcResponseCode.NOT_FOUND_METHOD);
         }
-        return RpcResponse.success(method.invoke(service, rpcRequest.getParameters()));
+        return RpcResponse.success(method.invoke(service, rpcRequest.getParameters()), rpcRequest.getRequestId());
     }
 }

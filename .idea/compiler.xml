@@ -19,4 +19,16 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="example-client" options="" />
+      <module name="example-server" options="" />
+      <module name="hello-service-api" options="" />
+      <module name="netty-demo" options="" />
+      <module name="nio-demo" options="" />
+      <module name="rpc-framework-common" options="" />
+      <module name="rpc-framework-simple" options="" />
+      <module name="socket-demo" options="" />
+    </option>
+  </component>
 </project>

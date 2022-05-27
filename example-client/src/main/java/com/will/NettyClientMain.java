@@ -9,6 +9,7 @@ import com.will.transport.netty.client.NettyRpcClient;
  * @createTime 2022/5/26 上午10:49
  */
 public class NettyClientMain {
+
     public static void main(String[] args) {
         RpcClient rpcClient = new NettyRpcClient("127.0.0.1", 9999);
         RpcClientProxy rpcClientProxy = new RpcClientProxy(rpcClient);

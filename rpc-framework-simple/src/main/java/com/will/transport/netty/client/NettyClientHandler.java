@@ -28,7 +28,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
             RpcResponse rpcResponse = (RpcResponse) msg;
             log.info(String.format("client receive msg: %s", rpcResponse));
             // 声明一个AttributeKey对象
-            AttributeKey<RpcResponse> key = AttributeKey.valueOf("rpcResponse");
+            AttributeKey<RpcResponse> key = AttributeKey.valueOf("rpcResponse" + rpcResponse.getRequestId());
             // 将服务端的返回结果保存到 AttributeMap上，可以看作是一个Channel的共享数据原
             ctx.channel().attr(key).set(rpcResponse);
             ctx.channel().close();

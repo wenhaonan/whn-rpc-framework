@@ -31,6 +31,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         try {
+            log.info("thread-name: " + Thread.currentThread().getName());
             RpcRequest rpcRequest = (RpcRequest) msg;
             log.info(String.format("server receive msg: %s", rpcRequest));
             String interfaceName = rpcRequest.getInterfaceName();

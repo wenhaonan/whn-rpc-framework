@@ -6,6 +6,7 @@ import com.will.serializer.kyro.KryoSerializer;
 import com.will.transport.RpcClient;
 import com.will.transport.netty.codec.NettyKryoDecoder;
 import com.will.transport.netty.codec.NettyKryoEncoder;
+import com.will.utils.checker.RpcMessageChecker;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -66,8 +67,9 @@ public class NettyRpcClient implements RpcClient {
                     }
                 });
                 channel.closeFuture().sync();
-                AttributeKey<RpcResponse> key = AttributeKey.valueOf("rpcResponse");
+                AttributeKey<RpcResponse> key = AttributeKey.valueOf("rpcResponse" + rpcRequest.getRequestId());
                 RpcResponse rpcResponse = channel.attr(key).get();
+                RpcMessageChecker.check(rpcResponse, rpcRequest);
                 return rpcResponse.getData();
             }
         } catch (InterruptedException e) {

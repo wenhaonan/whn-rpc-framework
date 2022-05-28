@@ -1,8 +1,6 @@
 package com.will.transport.netty.server;
 
 import com.will.dto.RpcRequest;
-import com.will.register.DefaultServiceRegistry;
-import com.will.register.ServiceRegistry;
 import com.will.transport.RpcRequestHandler;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -21,11 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
     private static RpcRequestHandler rpcRequestHandler;
-    private static ServiceRegistry serviceRegistry;
 
     static {
         rpcRequestHandler = new RpcRequestHandler();
-        serviceRegistry = new DefaultServiceRegistry();
     }
 
     @Override
@@ -34,9 +30,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
             log.info("thread-name: " + Thread.currentThread().getName());
             RpcRequest rpcRequest = (RpcRequest) msg;
             log.info(String.format("server receive msg: %s", rpcRequest));
-            String interfaceName = rpcRequest.getInterfaceName();
-            Object service = serviceRegistry.getService(interfaceName);
-            Object result = rpcRequestHandler.handle(rpcRequest, service);
+            Object result = rpcRequestHandler.handle(rpcRequest);
             log.info(String.format("server get result: %s", result.toString()));
             ChannelFuture channelFuture = ctx.writeAndFlush(result);
             channelFuture.addListener(ChannelFutureListener.CLOSE);

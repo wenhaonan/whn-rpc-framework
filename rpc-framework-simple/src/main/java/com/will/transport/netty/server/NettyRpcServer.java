@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class NettyRpcServer {
     private final int port;
-    private KryoSerializer kryoSerializer;
+    private final KryoSerializer kryoSerializer;
 
     public NettyRpcServer(int port) {
         this.port = port;

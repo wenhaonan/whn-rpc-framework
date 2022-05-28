@@ -1,8 +1,10 @@
 package com.will;
 
-import com.will.transport.RpcClient;
 import com.will.transport.RpcClientProxy;
-import com.will.transport.netty.client.NettyRpcClient;
+import com.will.transport.RpcClientTransport;
+import com.will.transport.netty.client.NettyClientTransport;
+
+import java.net.InetSocketAddress;
 
 /**
  * @author haonan.wen
@@ -11,7 +13,7 @@ import com.will.transport.netty.client.NettyRpcClient;
 public class NettyClientMain {
 
     public static void main(String[] args) {
-        RpcClient rpcClient = new NettyRpcClient("127.0.0.1", 9999);
+        RpcClientTransport rpcClient = new NettyClientTransport(new InetSocketAddress("127.0.0.1", 9999));
         RpcClientProxy rpcClientProxy = new RpcClientProxy(rpcClient);
         HelloService service = rpcClientProxy.getProxy(HelloService.class);
         String hello = service.hello(new Hello("111", "222"));

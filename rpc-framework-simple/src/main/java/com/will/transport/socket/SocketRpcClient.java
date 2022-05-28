@@ -5,7 +5,7 @@ import com.will.dto.RpcResponse;
 import com.will.enums.RpcErrorMessageEnum;
 import com.will.enums.RpcResponseCode;
 import com.will.exception.RpcException;
-import com.will.transport.RpcClient;
+import com.will.transport.RpcClientTransport;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 @AllArgsConstructor
-public class SocketRpcClient implements RpcClient {
+public class SocketRpcClient implements RpcClientTransport {
 
     public static final Logger logger = LoggerFactory.getLogger(SocketRpcClient.class);
 

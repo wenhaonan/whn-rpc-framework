@@ -12,10 +12,10 @@ import java.util.UUID;
 public class RpcClientProxy implements InvocationHandler {
     private static final Logger logger = LoggerFactory.getLogger(RpcClientProxy.class);
 
-    private RpcClient rpcClient;
+    private RpcClientTransport rpcClientTransport;
 
-    public RpcClientProxy(RpcClient rpcClient) {
-        this.rpcClient = rpcClient;
+    public RpcClientProxy(RpcClientTransport rpcClientTransport) {
+        this.rpcClientTransport = rpcClientTransport;
     }
 
     public <T> T getProxy(Class<T> clazz) {
@@ -34,6 +34,6 @@ public class RpcClientProxy implements InvocationHandler {
                 .paramTypes(method.getParameterTypes())
                 .requestId(UUID.randomUUID().toString())
                 .build();
-        return rpcClient.sendRpcRequest(rpcRequest);
+        return rpcClientTransport.sendRpcRequest(rpcRequest);
     }
 }

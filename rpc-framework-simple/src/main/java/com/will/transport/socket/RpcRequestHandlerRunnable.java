@@ -29,7 +29,7 @@ public class RpcRequestHandlerRunnable implements Runnable {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream())) {
             RpcRequest rpcRequest = (RpcRequest) objectInputStream.readObject();
-            Object result = rpcRequestHandler.handle(rpcRequest, serviceRegistry.getService(rpcRequest.getInterfaceName()));
+            Object result = rpcRequestHandler.handle(rpcRequest);
             objectOutputStream.writeObject(result);
             objectOutputStream.flush();
         } catch (IOException | ClassNotFoundException | RpcException e) {

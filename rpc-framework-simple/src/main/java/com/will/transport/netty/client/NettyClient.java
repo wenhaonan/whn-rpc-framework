@@ -3,16 +3,15 @@ package com.will.transport.netty.client;
 import com.will.dto.RpcRequest;
 import com.will.dto.RpcResponse;
 import com.will.serializer.kyro.KryoSerializer;
-import com.will.transport.RpcClient;
 import com.will.transport.netty.codec.NettyKryoDecoder;
 import com.will.transport.netty.codec.NettyKryoEncoder;
-import com.will.utils.checker.RpcMessageChecker;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.*;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.util.AttributeKey;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -20,17 +19,10 @@ import lombok.extern.slf4j.Slf4j;
  * @createTime 2022/5/26 上午9:51
  */
 @Slf4j
-public class NettyRpcClient implements RpcClient {
+public class NettyClient {
 
-
-    private final String host;
-    private final int port;
     private static final Bootstrap b;
 
-    public NettyRpcClient(String host, int port) {
-        this.host = host;
-        this.port = port;
-    }
 
     static {
         EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
@@ -38,7 +30,12 @@ public class NettyRpcClient implements RpcClient {
         KryoSerializer kryoSerializer = new KryoSerializer();
         b.group(eventLoopGroup)
                 .channel(NioSocketChannel.class)
+                // 连接超时时间，超过则连接失败
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
+                // 是否开启tcp心跳
                 .option(ChannelOption.SO_KEEPALIVE, true)
+                // tcp默认开启了nagle算法，尽可能发送大数据快，减少网络延迟
+                .option(ChannelOption.TCP_NODELAY, true)
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
@@ -51,30 +48,14 @@ public class NettyRpcClient implements RpcClient {
                 });
     }
 
+    private NettyClient() {
+    }
 
-    @Override
-    public Object sendRpcRequest(RpcRequest rpcRequest) {
-        try {
-            ChannelFuture channelFuture = b.connect(host, port).sync();
-            log.info("client connect {}", host + ":" + port);
-            Channel channel = channelFuture.channel();
-            if (null != channel) {
-                channel.writeAndFlush(rpcRequest).addListener(future -> {
-                    if (future.isSuccess()) {
-                        log.info(String.format("client send message: %s", rpcRequest.toString()));
-                    } else {
-                        log.error("Send failed:", future.cause());
-                    }
-                });
-                channel.closeFuture().sync();
-                AttributeKey<RpcResponse> key = AttributeKey.valueOf("rpcResponse" + rpcRequest.getRequestId());
-                RpcResponse rpcResponse = channel.attr(key).get();
-                RpcMessageChecker.check(rpcResponse, rpcRequest);
-                return rpcResponse.getData();
-            }
-        } catch (InterruptedException e) {
-            log.error("occur exception when connect server:", e);
-        }
-        return null;
+    public static void close() {
+        log.info("call close method");
+    }
+
+    public static Bootstrap initializeBootstrap() {
+        return b;
     }
 }

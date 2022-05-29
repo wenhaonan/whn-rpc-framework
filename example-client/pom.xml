@@ -16,13 +16,13 @@
         <dependency>
             <groupId>com.will</groupId>
             <artifactId>hello-service-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.will</groupId>
-            <artifactId>rpc-framework-simple</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <artifactId>rpc-framework-client</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
     </dependencies>

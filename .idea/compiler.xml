@@ -8,16 +8,21 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="netty-demo" />
-        <module name="rpc-framework-common" />
+        <module name="rpc-framework-serialization" />
+        <module name="nio-demo" />
+        <module name="rpc-framework-registry" />
+        <module name="rpc-framework-server" />
+        <module name="rpc-framework-client" />
         <module name="example-server" />
-        <module name="rpc-framework-simple" />
         <module name="example-client" />
         <module name="hello-service-api" />
-        <module name="nio-demo" />
+        <module name="rpc-framework-common" />
         <module name="socket-demo" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8" />
+    <bytecodeTargetLevel target="8">
+      <module name="rpc-framework-simple" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

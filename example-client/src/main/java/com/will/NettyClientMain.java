@@ -1,8 +1,8 @@
 package com.will;
 
-import com.will.transport.RpcClientProxy;
-import com.will.transport.RpcClientTransport;
-import com.will.transport.netty.client.NettyClientTransport;
+
+import com.will.netty.NettyClientTransport;
+import com.will.netty.RpcClientProxy;
 
 /**
  * @author haonan.wen

@@ -1,6 +1,7 @@
 package com.will;
 
-import com.will.transport.netty.server.NettyRpcServer;
+
+import com.will.netty.NettyRpcServer;
 
 /**
  * @author haonan.wen

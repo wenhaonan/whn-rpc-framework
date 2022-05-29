@@ -9,17 +9,22 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>example-server</artifactId>
-    <dependencies>
+    <artifactId>rpc-framework-client</artifactId>
 
+    <dependencies>
         <dependency>
             <groupId>com.will</groupId>
-            <artifactId>hello-service-api</artifactId>
+            <artifactId>rpc-framework-common</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.will</groupId>
-            <artifactId>rpc-framework-server</artifactId>
+            <artifactId>rpc-framework-serialization</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.will</groupId>
+            <artifactId>rpc-framework-registry</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

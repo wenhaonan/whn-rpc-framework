@@ -3,8 +3,8 @@ package com.will.transport;
 import com.will.dto.RpcRequest;
 import com.will.dto.RpcResponse;
 import com.will.enums.RpcResponseCode;
-import com.will.register.DefaultServiceRegistry;
-import com.will.register.ServiceRegistry;
+import com.will.provider.DefaultServiceProvider;
+import com.will.provider.ServiceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,16 +18,16 @@ import java.lang.reflect.Method;
 public class RpcRequestHandler {
     private static final Logger logger = LoggerFactory.getLogger(RpcRequestHandler.class);
 
-    private static final ServiceRegistry serviceRegistry;
+    private static final ServiceProvider serviceProvider;
 
     static {
-        serviceRegistry = new DefaultServiceRegistry();
+        serviceProvider = new DefaultServiceProvider();
     }
 
 
     public Object handle(RpcRequest rpcRequest) {
         Object result = null;
-        Object service = serviceRegistry.getService(rpcRequest.getInterfaceName());
+        Object service = serviceProvider.getService(rpcRequest.getInterfaceName());
         try {
             result = invokeTargetMethod(rpcRequest, service);
             logger.info("service:{} successful invoke method:{}", rpcRequest.getInterfaceName(), rpcRequest.getMethodName());

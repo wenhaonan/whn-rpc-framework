@@ -2,6 +2,8 @@ package com.will.transport.netty.client;
 
 import com.will.dto.RpcRequest;
 import com.will.dto.RpcResponse;
+import com.will.register.ServiceRegistry;
+import com.will.register.ZkServiceRegistry;
 import com.will.transport.RpcClientTransport;
 import com.will.utils.checker.RpcMessageChecker;
 import io.netty.channel.Channel;
@@ -17,15 +19,16 @@ import java.net.InetSocketAddress;
 @Slf4j
 public class NettyClientTransport implements RpcClientTransport {
 
-    private final InetSocketAddress inetSocketAddress;
+    private final ServiceRegistry serviceRegistry;
 
-    public NettyClientTransport(InetSocketAddress inetSocketAddress) {
-        this.inetSocketAddress = inetSocketAddress;
+    public NettyClientTransport() {
+        this.serviceRegistry = new ZkServiceRegistry();
     }
 
     @Override
     public Object sendRpcRequest(RpcRequest rpcRequest) {
         try {
+            InetSocketAddress inetSocketAddress = serviceRegistry.lookupService(rpcRequest.getInterfaceName());
             Channel channel = NettyChannelProvider.get(inetSocketAddress);
             if (null != channel && channel.isActive()) {
                 channel.writeAndFlush(rpcRequest).addListener(future -> {

@@ -1,6 +1,5 @@
 package com.will;
 
-import com.will.register.DefaultServiceRegistry;
 import com.will.transport.netty.server.NettyRpcServer;
 
 /**
@@ -10,11 +9,10 @@ import com.will.transport.netty.server.NettyRpcServer;
 public class NettyServerMain {
 
     public static void main(String[] args) {
-        HelloServiceImpl helloService = new HelloServiceImpl();
-        DefaultServiceRegistry defaultServiceRegistry = new DefaultServiceRegistry();
+        HelloService helloService = new HelloServiceImpl();
+        NettyRpcServer nettyRpcServer = new NettyRpcServer("127.0.0.1", 8001);
         // 手动注册
-        defaultServiceRegistry.register(helloService);
-        NettyRpcServer socketRpcServer = new NettyRpcServer(9999);
-        socketRpcServer.run();
+        nettyRpcServer.publishService(helloService, HelloService.class);
+        nettyRpcServer.run();
     }
 }

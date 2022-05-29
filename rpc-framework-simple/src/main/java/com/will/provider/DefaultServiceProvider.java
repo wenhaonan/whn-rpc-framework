@@ -1,4 +1,4 @@
-package com.will.register;
+package com.will.provider;
 
 import com.will.enums.RpcErrorMessageEnum;
 import com.will.exception.RpcException;
@@ -10,12 +10,13 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 默认的注册中心，使用map存储服务信息，可以通过zookeeper来改进
+ * 默认的注册中心，使用map存储服务信息，服务端调用
+ *
  * @author haonan.wen
  * @createTime 2022/5/19 下午3:34
  */
-public class DefaultServiceRegistry implements ServiceRegistry {
-    private static final Logger logger = LoggerFactory.getLogger(DefaultServiceRegistry.class);
+public class DefaultServiceProvider implements ServiceProvider {
+    private static final Logger logger = LoggerFactory.getLogger(DefaultServiceProvider.class);
 
     /**
      * 接口名和服务的对应关系，TODO 处理一个接口被两个实现类实现的情况

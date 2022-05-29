@@ -1,6 +1,6 @@
 package com.will.transport.socket;
 
-import com.will.register.ServiceRegistry;
+import com.will.provider.ServiceProvider;
 import com.will.transport.RpcRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +21,9 @@ public class SocketRpcServer {
     private ExecutorService threadPool;
     private RpcRequestHandler rpcRequestHandler = new RpcRequestHandler();
     private static final Logger logger = LoggerFactory.getLogger(SocketRpcServer.class);
-    private final ServiceRegistry serviceRegistry;
+    private final ServiceProvider serviceRegistry;
 
-    public SocketRpcServer(ServiceRegistry serviceRegistry) {
+    public SocketRpcServer(ServiceProvider serviceRegistry) {
         this.serviceRegistry = serviceRegistry;
         BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(BLOCKING_QUEUE_CAPACITY);
         ThreadFactory threadFactory = Executors.defaultThreadFactory();

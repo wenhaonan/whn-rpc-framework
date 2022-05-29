@@ -2,7 +2,7 @@ package com.will.transport.socket;
 
 import com.will.dto.RpcRequest;
 import com.will.exception.RpcException;
-import com.will.register.ServiceRegistry;
+import com.will.provider.ServiceProvider;
 import com.will.transport.RpcRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +16,9 @@ public class RpcRequestHandlerRunnable implements Runnable {
     private static final Logger logger = LoggerFactory.getLogger(RpcRequestHandlerRunnable.class);
     private Socket socket;
     private RpcRequestHandler rpcRequestHandler;
-    private ServiceRegistry serviceRegistry;
+    private ServiceProvider serviceRegistry;
 
-    public RpcRequestHandlerRunnable(Socket socket, RpcRequestHandler rpcRequestHandler, ServiceRegistry serviceRegistry) {
+    public RpcRequestHandlerRunnable(Socket socket, RpcRequestHandler rpcRequestHandler, ServiceProvider serviceRegistry) {
         this.socket = socket;
         this.rpcRequestHandler = rpcRequestHandler;
         this.serviceRegistry = serviceRegistry;

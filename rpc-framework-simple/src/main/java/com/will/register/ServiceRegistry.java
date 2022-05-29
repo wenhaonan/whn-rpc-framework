@@ -1,14 +1,27 @@
 package com.will.register;
 
+import java.net.InetSocketAddress;
+
 /**
- * 服务注册中心接口
+ * 服务注册中心
  *
  * @author haonan.wen
- * @createTime 2022/5/19 下午3:33
+ * @createTime 2022/5/29 下午5:12
  */
 public interface ServiceRegistry {
+    /**
+     * 注册服务
+     *
+     * @param serviceName       服务名称
+     * @param inetSocketAddress 提供服务的地址
+     */
+    void registerService(String serviceName, InetSocketAddress inetSocketAddress);
 
-    <T> void register(T service);
-
-    Object getService(String serviceName);
+    /**
+     * 查找服务
+     *
+     * @param serviceName 服务名称
+     * @return 提供服务的地址
+     */
+    InetSocketAddress lookupService(String serviceName);
 }
